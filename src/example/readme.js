@@ -1,44 +1,27 @@
-# MutableProxy
+import mutableProxyFactory from '../lib/mutableProxyFactory';
 
-#####Basic Usage
-
-The factory returns a controller object with functions to affect the mutable state of the proxy
-
-```javascript
+// The factory returns an object with the functions to control the proxy
 const {
   setTarget,
-  setHandler,
   proxy
 } = mutableProxyFactory();
-```
 
-Set an object as target for the proxy
-
-```javascript
+// Set an object as target for the proxy
 setTarget({ a: 'apple' });
 console.log(proxy.a); // => 'apple'
 console.log(Object.getPrototypeOf(proxy) === Object.prototype); // => 'true'
-```
 
-Set an array as target for the proxy
-
-```javascript
+// Set an array as target for the proxy
 setTarget(['a', 'b', 'c']);
 console.log(proxy[1]); // => 'b'
 console.log(Object.getPrototypeOf(proxy) === Array.prototype);// => 'true'
-```
 
-Set a function as target for the proxy
-
-```javascript
+// Set a function as target for the proxy
 setTarget(() => 5);
 console.log(proxy()); // => '5'
 console.log(Object.getPrototypeOf(proxy) === Function.prototype); // => 'true'
-```
 
-Set an object with a custom prototype for the proxy
 
-```javascript
 class Person {
   constructor(name) {
     this.name = name;
@@ -48,7 +31,7 @@ class Person {
   }
 }
 
+// Set an object with a custom prototype for the proxy
 setTarget(new Person('John'));
 console.log(proxy.speak()); // => 'hi, my name is John'
 console.log(Object.getPrototypeOf(proxy)); // => 'Person {}'
-```

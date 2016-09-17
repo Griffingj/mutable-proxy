@@ -23,8 +23,12 @@ function setHandler(handler) {
   mutableHandler = handler;
 }
 
-export default function mutableProxyFactory() {
+export default function mutableProxyFactory(defaultTarget) {
   setTarget(() => {});
+
+  if (defaultTarget) {
+    setTarget(defaultTarget);
+  }
   setHandler(Reflect);
 
   // Dynamically forward all the traps to the associated methods on the mutable handler
