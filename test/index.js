@@ -5,19 +5,40 @@ import mutableProxyFactory from '../src/index';
 const lab = exports.lab = Lab.script();
 const { describe, it, beforeEach } = lab;
 
-describe('controller', () => {
+describe('mutableProxyFactory', () => {
+  let proxy;
+  let setTarget;
+  let setHandler;
+  let getTarget;
+  let getHandler;
+
+  beforeEach(done => {
+    const controller = mutableProxyFactory();
+    proxy = controller.proxy;
+    setTarget = controller.setTarget;
+    getTarget = controller.getTarget;
+    setHandler = controller.setHandler;
+    getHandler = controller.getHandler;
+    done();
+  });
+
+  it('sets the passed in value as the initial target', done => {
+    const target = {};
+    expect(mutableProxyFactory(target).getTarget()).toEqual(target);
+    done();
+  });
+
   describe('setTarget', () => {
+    it('should throw if passed a primitive', done => {
+      try {
+        setTarget(5);
+      } catch (error) {
+        expect(error).toBeTruthy();
+      }
+      done();
+    });
+
     describe('proxy', () => {
-      let proxy;
-      let setTarget;
-
-      beforeEach(done => {
-        const controller = mutableProxyFactory();
-        proxy = controller.proxy;
-        setTarget = controller.setTarget;
-        done();
-      });
-
       describe('when object set as target', () => {
         it('should be a plain object', done => {
           setTarget({ a: 'apple' });
@@ -119,6 +140,44 @@ describe('controller', () => {
           done();
         });
       });
+    });
+  });
+
+  describe('setHandler', () => {
+    it('should throw if passed an object with non-function fields', done => {
+      try {
+        setHandler({ a: 'apple' });
+      } catch (error) {
+        expect(error).toBeTruthy();
+      }
+      done();
+    });
+
+    it('should throw if passed an object with non-trap fields', done => {
+      try {
+        setHandler({ a: () => 5 });
+      } catch (error) {
+        expect(error).toBeTruthy();
+      }
+      done();
+    });
+  });
+
+  describe('getHandler', () => {
+    it('should return the current handler', done => {
+      const handler = { get() {} };
+      setHandler(handler);
+      expect(getHandler()).toEqual(handler);
+      done();
+    });
+  });
+
+  describe('getTarget', () => {
+    it('should return the current target', done => {
+      const target = {};
+      setTarget(target);
+      expect(getTarget()).toEqual(target);
+      done();
     });
   });
 });
