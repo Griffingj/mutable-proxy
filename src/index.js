@@ -23,6 +23,7 @@ module.exports = function mutableProxyFactory(defaultTarget) {
     });
     mutableHandler = handler;
   }
+  setTarget(() => {});
 
   if (defaultTarget) {
     setTarget(defaultTarget);
@@ -46,6 +47,6 @@ module.exports = function mutableProxyFactory(defaultTarget) {
     getHandler() {
       return mutableHandler;
     },
-    proxy: new Proxy(() => {}, handler)
+    proxy: new Proxy(mutableTarget, handler)
   };
 };
