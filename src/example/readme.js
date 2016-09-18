@@ -1,4 +1,4 @@
-import mutableProxyFactory from '../lib/mutableProxyFactory';
+import mutableProxyFactory from '../index';
 
 // The factory returns an object with the functions to control the proxy
 const {
