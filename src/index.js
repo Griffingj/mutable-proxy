@@ -33,10 +33,7 @@ module.exports = function mutableProxyFactory(defaultTarget) {
   // Dynamically forward all the traps to the associated methods on the mutable handler
   const handler = new Proxy({}, {
     get(target, property) {
-      return (...args) => {
-        const patched = [mutableTarget].concat(...args.slice(1));
-        return mutableHandler[property].apply(null, patched);
-      };
+      return (...args) => mutableHandler[property].apply(null, [mutableTarget, ...args.slice(1)]);
     }
   });
 
