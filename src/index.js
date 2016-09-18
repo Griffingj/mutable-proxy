@@ -1,4 +1,4 @@
-module.exports = function mutableProxyFactory(defaultTarget = {}) {
+module.exports = function mutableProxyFactory(defaultTarget) {
   let mutableHandler;
   let mutableTarget;
 
@@ -23,8 +23,11 @@ module.exports = function mutableProxyFactory(defaultTarget = {}) {
     });
     mutableHandler = handler;
   }
+  setTarget(() => {});
 
-  setTarget(defaultTarget);
+  if (defaultTarget) {
+    setTarget(defaultTarget);
+  }
   setHandler(Reflect);
 
 
