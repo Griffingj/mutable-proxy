@@ -33,10 +33,9 @@ module.exports = function mutableProxyFactory(defaultTarget) {
   // Dynamically forward all the traps to the associated methods on the mutable handler
   const handler = new Proxy({}, {
     get(target, property) {
-      return function () {
-        /* eslint prefer-rest-params: 0 */
-        const args = [mutableTarget].concat(Array.prototype.slice.call(arguments, 1));
-        return mutableHandler[property].apply(null, args);
+      return (...args) => {
+        const patched = [mutableTarget].concat(...args.slice(1));
+        return mutableHandler[property].apply(null, patched);
       };
     }
   });
