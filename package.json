@@ -2,7 +2,7 @@
   "name": "mutable-proxy",
   "version": "0.1.2",
   "description": "A library for creating mutable proxies",
-  "main": ".build/index.js",
+  "main": "build/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/Griffingj/mutable-proxy.git"
@@ -14,7 +14,7 @@
     "test-cov": "lab --coverage",
     "report-cov": "lab --coverage -r lcov | codeclimate-test-reporter",
     "prepublish": "npm run build",
-    "build": "babel src --out-dir .build",
+    "build": "babel src --out-dir build",
     "validate": "npm ls"
   },
   "engines": {
