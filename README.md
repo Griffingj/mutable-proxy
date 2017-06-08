@@ -3,7 +3,7 @@
 [![Travis-Ci](https://travis-ci.org/Griffingj/mutable-proxy.svg?branch=master)](https://travis-ci.org/Griffingj/mutable-proxy.svg?branch=master)
 [![Code Climate](https://codeclimate.com/github/Griffingj/mutable-proxy/badges/gpa.svg)](https://codeclimate.com/github/Griffingj/mutable-proxy)
 [![Test Coverage](https://codeclimate.com/github/Griffingj/mutable-proxy/badges/coverage.svg)](https://codeclimate.com/github/Griffingj/mutable-proxy/coverage)
-##### Basic Usage
+## Basic Usage
 
 The factory returns a controller object with functions to affect the mutable state of the proxy
 
