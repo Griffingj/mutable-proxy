@@ -18,8 +18,8 @@
     "validate": "npm ls"
   },
   "engines": {
-    "node": "6.X.X",
-    "npm": "3.X.X"
+    "node": ">=6.X.X",
+    "npm": ">=3.X.X"
   },
   "author": "John Griffing",
   "license": "MIT",
